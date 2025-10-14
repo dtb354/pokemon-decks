@@ -1,10 +1,11 @@
 <?php
 
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/dashboard', function () {
@@ -23,5 +24,33 @@ Route::get('/about-us', function() {
         'company' => $company
     ]);
 });
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('products/{name}', function(string $name) {
+    // code
+    $product = $name;
+    return view('products', [
+        'product' => $product
+    ]);
+});
+
+Route::get ('/test/id', function (int $id) {
+    return view('test', compact('id'));
+});
+
+Route::get('/user/profile', function () {
+    // ...
+})->name('profile');
+
+Route::get('/products/details/{id?}', function ($id) {
+    return "Product details voor product met ID: " . $id;
+})->name('product.details');
+//Named Routing
+
+Route::resource('products', ProductController::class);
+
 
 require __DIR__.'/auth.php';
