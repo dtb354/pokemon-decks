@@ -30,6 +30,7 @@ class PostController extends Controller
     public function create()
     {
         //
+        return view('posts.create');
     }
 
     /**
@@ -37,16 +38,34 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request);
+
+        $request->validate([
+            'name'=>['required', 'string', 'max:255'],
+            'text'=>['required', 'string', 'max:255'],
+            'type'=>['required', 'integer'],
+            'strategy'=>['required', 'integer']
+        ]);
+
+        $post = new Post();
+        $post -> user_id = 1;
+        $post -> name = $request->input('name');
+        $post -> text = $request->input('text');
+        $post -> type_tag_id = $request->input('type');
+        $post -> strategy_tag_id = $request->input('strategy');
+        $post->save();
+
+        return redirect()->route('posts.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Post $post)
+    public function show(string $id)
     {
+        $post = Post::find($id);
         //
-        return view('posts.show', $post);
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -54,7 +73,10 @@ class PostController extends Controller
      */
     public function edit(string $id)
     {
+        $post = Post::find($id);
         //
+
+        return view('posts.edit', compact('post'));
     }
 
     /**
@@ -62,8 +84,9 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        dd($request->all());
     }
+
 
     /**
      * Remove the specified resource from storage.
