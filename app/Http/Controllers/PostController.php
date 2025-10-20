@@ -84,7 +84,24 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        dd($request->all());
+        //dd($request->all());
+
+        $request->validate([
+            'name'=>['required', 'string', 'max:255'],
+            'text'=>['required', 'string', 'max:255'],
+            'type'=>['required', 'integer'],
+            'strategy'=>['required', 'integer']
+        ]);
+
+        $post = Post::find($id);
+        $post->update([
+            'name' => $request->name,
+            'text' => $request->text,
+            'type_tag_id' => $request->type,
+            'strategy_tag_id' => $request->strategy,
+        ]);
+
+        return redirect()->route('posts.show', $post->id);
     }
 
 
