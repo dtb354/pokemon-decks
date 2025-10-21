@@ -1,6 +1,5 @@
-
-<h1> Create Post </h1>
-
+<x-layout>
+    <h1> Create Post </h1>
     <form method="POST" action="{{route('posts.store')}}">
         @csrf
         <div>
@@ -12,7 +11,7 @@
             <label for="name"> Text </label>
             <input type="text" id="text" name="text">
             @error('price')
-                {{ $errormessage }}
+            {{ $errormessage }}
             @enderror
         </div>
 
@@ -29,3 +28,7 @@
             <button type="submit"> Opslaan </button>
         </div>
     </form>
+</x-layout>
+
+
+
