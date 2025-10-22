@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PostController extends Controller
 {
@@ -49,7 +51,7 @@ class PostController extends Controller
         ]);
 
         $post = new Post();
-        $post -> user_id = 1;
+        $post->user_id = $request->user()->id;
         $post -> name = $request->input('name');
         $post -> text = $request->input('text');
         $post -> type_tag_id = $request->input('type');
