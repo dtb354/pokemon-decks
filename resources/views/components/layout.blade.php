@@ -23,6 +23,10 @@
             Create Post
         </x-nav-link>
 
+        <x-nav-link href="{{ route('profile.show') }}" :active="request()->is('profile')">
+            My Profile
+        </x-nav-link>
+
         <x-nav-link :href="route('logout')" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Log Out') }}
         </x-nav-link>

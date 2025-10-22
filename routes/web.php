@@ -55,5 +55,7 @@ Route::resource('products', ProductController::class);
 
 Route::resource('posts', PostController::class);
 
+Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
+
 
 require __DIR__.'/auth.php';
