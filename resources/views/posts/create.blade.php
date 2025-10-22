@@ -1,6 +1,6 @@
 <x-layout>
     <h1> Create Post </h1>
-    <form method="POST" action="{{route('posts.store')}}">
+    <form method="POST" action="{{route('posts.store')}}" enctype="multipart/form-data">
         @csrf
         <div>
             <label for="name"> Naam </label>
@@ -24,6 +24,13 @@
             <label for="name>">Strategy Tag</label>
             <input type="text" id="strategy" name="strategy">
         </div>
+
+        <div>
+            <label for="image">Image (optional)</label>
+            <input type="file" name="image" id="image" accept="image/*">
+        </div>
+
+
         <div>
             <button type="submit"> Opslaan </button>
         </div>

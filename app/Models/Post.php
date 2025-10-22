@@ -16,5 +16,6 @@ class Post extends Model
         'text',
         'type_tag_id',
         'strategy_tag_id',
+        'image',
     ];
 }
