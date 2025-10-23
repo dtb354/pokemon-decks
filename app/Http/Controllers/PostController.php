@@ -140,6 +140,22 @@ class PostController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+
+        // Authorization: only owner can delete
+        if ($post->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        // Optional: delete the image file too
+        if ($post->image && \Storage::disk('public')->exists($post->image)) {
+            \Storage::disk('public')->delete($post->image);
+        }
+
+        // Delete the post from the database
+        $post->delete();
+
+        return redirect()->route('posts.index')
+            ->with('success', 'Post deleted successfully!');
     }
 }

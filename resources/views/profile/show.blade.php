@@ -19,12 +19,36 @@
                         <li class="border p-3 rounded-lg">
                             <h3 class="font-semibold">{{ $post->name }}</h3>
                             <p>{{ $post->text }}</p>
+                            <p>{{ $post->type_tag_id }}</p>
+                            <p>{{ $post->strategy_tag_id }}</p>
+
+                            <div>
+                                <label>Current Image:</label><br>
+                                @if ($post->image)
+                                    <img
+                                        src="{{ asset('storage/' . $post->image) }}"
+                                        alt="Post Image"
+                                        width="200"
+                                        style="border-radius: 10px;"
+                                    >
+                                @else
+                                    <p><em>No image uploaded.</em></p>
+                                @endif
+                            </div>
+
                             <a href="{{ route('posts.show', $post->id) }}" class="text-blue-600 hover:underline">
-                                View Post
+                                View
                             </a>
                             <a href="{{ route('posts.edit', $post->id) }}" class="text-blue-600 hover:underline">
-                                Edit Post
+                                Edit
                             </a>
+                            <form action="{{ route('posts.destroy', $post->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this post?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">
+                                    Delete Post
+                                </button>
+                            </form>
                         </li>
                     @endforeach
                 </ul>
