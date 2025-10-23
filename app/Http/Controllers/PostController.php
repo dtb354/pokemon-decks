@@ -43,27 +43,29 @@ class PostController extends Controller
         //dd($request);
 
         $request->validate([
-            'name'=>['required', 'string', 'max:255'],
-            'text'=>['required', 'string', 'max:255'],
-            'type'=>['required', 'integer'],
-            'strategy'=>['required', 'integer'],
+            'name' => ['required', 'string', 'max:255'],
+            'text' => ['required', 'string', 'max:255'],
+            'type' => ['required', 'integer'],
+            'strategy' => ['required', 'integer'],
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048'],
         ]);
 
         $post = new Post();
-        $post->user_id = $request->user()->id;
-        $post -> name = $request->input('name');
-        $post -> text = $request->input('text');
-        $post -> type_tag_id = $request->input('type');
-        $post -> strategy_tag_id = $request->input('strategy');
+        $post->user_id = Auth::id();
+        $post->name = $request->input('name');
+        $post->text = $request->input('text');
+        $post->type_tag_id = $request->input('type');
+        $post->strategy_tag_id = $request->input('strategy');
 
-        // If a new image was uploaded, store it
-        $nameOfFile = $request->file('image')->storePublicly('posts', 'public');
-        $post->image = $nameOfFile; //to store the link to the image in the DB
+        // Only store the image if one was uploaded
+        if ($request->hasFile('image')) {
+            $nameOfFile = $request->file('image')->storePublicly('posts', 'public');
+            $post->image = $nameOfFile;
+        }
 
         $post->save();
 
-        return redirect()->route('posts.index');
+        return redirect()->route('posts.index')->with('success', 'Post created successfully!');
     }
 
     /**
