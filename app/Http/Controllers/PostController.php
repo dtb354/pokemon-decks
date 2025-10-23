@@ -72,6 +72,9 @@ class PostController extends Controller
     public function show(string $id)
     {
         $post = Post::find($id);
+
+
+
         //
         return view('posts.show', compact('post'));
     }
@@ -82,7 +85,11 @@ class PostController extends Controller
     public function edit(string $id)
     {
         $post = Post::find($id);
-        //
+
+        // Authorization check
+        if ($post->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
 
         return view('posts.edit', compact('post'));
     }
@@ -92,8 +99,14 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //dd($request->all());
+        $post = Post::findOrFail($id);
 
+        // Authorization check
+        if ($post->user_id !== Auth::id()) {
+            abort(403, 'Unauthorized action.');
+        }
+
+        // Validate inputs
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'text' => ['required', 'string', 'max:255'],
@@ -102,22 +115,20 @@ class PostController extends Controller
             'image' => ['nullable', 'image', 'mimes:jpg,jpeg,png,gif,webp', 'max:2048'],
         ]);
 
-        $post = Post::findOrFail($id);
+        // Update the post fields (same structure as your store method)
+        $post->name = $request->input('name');
+        $post->text = $request->input('text');
+        $post->type_tag_id = $request->input('type');
+        $post->strategy_tag_id = $request->input('strategy');
 
-        // Prepare the data to update
-        $data = [
-            'name' => $request->name,
-            'text' => $request->text,
-            'type_tag_id' => $request->type,
-            'strategy_tag_id' => $request->strategy,
-        ];
+        // If a new image was uploaded, store it (same logic as store())
+        if ($request->hasFile('image')) {
+            $nameOfFile = $request->file('image')->storePublicly('posts', 'public');
+            $post->image = $nameOfFile; // store link to the image in DB
+        }
 
-        // If a new image was uploaded, store it
-        $nameOfFile = $request->file('image')->storePublicly('posts', 'public');
-        $post->image = $nameOfFile; //to store the link to the image in the DB
-
-        // Update the post with all the data
-        $post->update($data);
+        // Save updated post
+        $post->save();
 
         return redirect()->route('posts.show', $post->id)
             ->with('success', 'Post updated successfully!');
