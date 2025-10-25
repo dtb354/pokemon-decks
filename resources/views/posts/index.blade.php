@@ -50,7 +50,20 @@
                         </h3>
                         <p class="text-xs text-gray-600 line-clamp-2 mt-2">{{ $post->text }}</p>
                     </div>
-                </div>
+
+                    {{-- Tags --}}
+                    <div class="mt-2 text-sm text-gray-500">
+                        <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
+                            {{ $post->typeTag ? $post->typeTag->name : 'No Type Tag' }}
+                        </span>
+                        <span class="inline-block bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                            {{ $post->strategyTag ? $post->strategyTag->name : 'No Strategy Tag' }}
+                        </span>
+                    </div>
+
+                    {{-- Author --}}
+                    <p class="mt-2 text-xs text-gray-500">By {{ $post->user ? $post->user->first_name . ' ' . $post->user->last_name : 'Unknown' }}</p>
+                    </div>
             @endforeach
         </div>
 

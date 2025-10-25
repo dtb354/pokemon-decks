@@ -24,4 +24,14 @@ class Post extends Model
     {
         return $this->belongsTo(\App\Models\User::class);
     }
+
+    public function strategyTag()
+    {
+        return $this->belongsTo(StrategyTag::class, 'strategy_tag_id');
+    }
+
+    public function typeTag()
+    {
+        return $this->belongsTo(TypeTag::class, 'type_tag_id');
+    }
 }

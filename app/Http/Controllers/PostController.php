@@ -14,8 +14,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        // Fetch only active posts
-        $posts = Post::where('is_active', true)->get();
+        // Fetch only active posts and eager-load relationships
+        $posts = Post::with(['user', 'strategyTag', 'typeTag'])
+            ->where('is_active', true)
+            ->get();
 
         // Pick a random featured post from the active ones
         $firstPost = $posts->random();
@@ -55,6 +57,7 @@ class PostController extends Controller
         $post->text = $request->input('text');
         $post->type_tag_id = $request->input('type');
         $post->strategy_tag_id = $request->input('strategy');
+        $post->is_active = false;
 
         // Only store the image if one was uploaded
         if ($request->hasFile('image')) {

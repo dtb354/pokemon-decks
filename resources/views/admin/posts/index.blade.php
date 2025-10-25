@@ -8,6 +8,20 @@
             </div>
         @endif
 
+        <div class="flex justify-between items-center mb-6">
+
+            <form method="GET" action="{{ route('admin.posts.index') }}" class="flex items-center space-x-2">
+                <label for="filter" class="text-sm font-medium text-gray-700">Show:</label>
+                <select id="filter" name="filter" onchange="this.form.submit()"
+                        class="border border-gray-300 rounded-md px-2 py-1 text-sm">
+                    <option value="all" {{ $filter === 'all' ? 'selected' : '' }}>All</option>
+                    <option value="active" {{ $filter === 'active' ? 'selected' : '' }}>Active</option>
+                    <option value="inactive" {{ $filter === 'inactive' ? 'selected' : '' }}>Inactive</option>
+                </select>
+            </form>
+        </div>
+
+
         <table class="w-full border border-gray-300 text-sm">
             <thead>
             <tr class="bg-gray-200">
@@ -23,7 +37,9 @@
                 <tr class="hover:bg-gray-100">
                     <td class="border px-3 py-2">{{ $post->id }}</td>
                     <td class="border px-3 py-2">{{ $post->name }}</td>
-                    <td class="border px-3 py-2">{{ $post->user->name ?? 'Unknown' }}</td>
+                    <td class="border px-3 py-2">
+                        {{ $post->user ? $post->user->first_name . ' ' . $post->user->last_name : 'Unknown' }}
+                    </td>
                     <td class="border px-3 py-2">
                         @if($post->image)
                             <img src="{{ asset('storage/' . $post->image) }}" class="w-12 h-12 object-cover rounded">
