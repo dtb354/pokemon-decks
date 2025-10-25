@@ -14,15 +14,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        // Fetch all posts
-        $posts = Post::all();
-        //dd($posts);
+        // Fetch only active posts
+        $posts = Post::where('is_active', true)->get();
 
-         //Fetch the first post
-        $firstPost = Post::first();
+        // Pick a random featured post from the active ones
+        $firstPost = $posts->random();
 
-         //Send both to the view
-        return view('posts.index', compact('posts'), compact('firstPost'));
+        // Send both to the view
+        return view('posts.index', compact('posts', 'firstPost'));
 
     }
 

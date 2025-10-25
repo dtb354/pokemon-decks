@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -57,6 +58,13 @@ Route::resource('products', ProductController::class);
 Route::resource('posts', PostController::class);
 
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
+
+Route::get('/admin/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
+Route::get('/admin/posts/{id}/edit', [AdminPostController::class, 'edit'])->name('admin.posts.edit');
+Route::put('/admin/posts/{id}', [AdminPostController::class, 'update'])->name('admin.posts.update');
+Route::delete('/admin/posts/{id}', [AdminPostController::class, 'destroy'])->name('admin.posts.destroy');
+Route::patch('/admin/posts/{id}/toggle', [AdminPostController::class, 'toggleActive'])->name('admin.posts.toggle');
+
 
 
 require __DIR__.'/auth.php';

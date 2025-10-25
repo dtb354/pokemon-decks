@@ -27,6 +27,15 @@
             My Profile
         </x-nav-link>
 
+        {{-- ✅ Show admin links only if user is logged in AND is admin --}}
+        @auth
+            @if(auth()->user()->is_admin)
+                <x-nav-link href="{{ route('admin.posts.index') }}" :active="request()->is('admin/posts')">
+                    Admin Dashboard
+                </x-nav-link>
+            @endif
+        @endauth
+
         <x-nav-link :href="route('logout')" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             {{ __('Log Out') }}
         </x-nav-link>
