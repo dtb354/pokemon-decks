@@ -12,20 +12,37 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        // Fetch only active posts and eager-load relationships
-        $posts = Post::with(['user', 'strategyTag', 'typeTag'])
-            ->where('is_active', true)
-            ->get();
+        $query = Post::with(['user', 'strategyTag', 'typeTag']);
+
+        // Filters
+        if ($request->filled('type_tag')) {
+            $query->where('type_tag_id', $request->type_tag);
+        }
+
+        if ($request->filled('strategy_tag')) {
+            $query->where('strategy_tag_id', $request->strategy_tag);
+        }
+
+        if ($request->filled('active')) {
+            $query->where('is_active', $request->active);
+        }
+
+        $posts = $query->get();
 
         // Pick a random featured post from the active ones
-        $firstPost = $posts->random();
+        $activePosts = $posts->where('is_active', true);
+        $firstPost = $activePosts->isNotEmpty() ? $activePosts->random() : null;
 
-        // Send both to the view
-        return view('posts.index', compact('posts', 'firstPost'));
 
+        // Fetch all tags for filters
+        $typeTags = \App\Models\TypeTag::all();
+        $strategyTags = \App\Models\StrategyTag::all();
+
+        return view('posts.index', compact('posts', 'firstPost', 'typeTags', 'strategyTags'));
     }
+
 
     /**
      * Show the form for creating a new resource.

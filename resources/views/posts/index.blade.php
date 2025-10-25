@@ -23,6 +23,56 @@
             <p class="text-gray-600 mb-8 text-center">No posts found.</p>
         @endif
 
+        {{-- Filter Section --}}
+        <form method="GET" action="{{ route('posts.index') }}" class="mb-8 flex flex-wrap gap-4 items-end">
+            {{-- Type Tag Filter --}}
+            <div>
+                <label for="type_tag" class="block text-sm font-medium text-gray-700">Type Tag</label>
+                <select name="type_tag" id="type_tag" class="border rounded-lg px-3 py-2">
+                    <option value="">All</option>
+                    @foreach($typeTags as $tag)
+                        <option value="{{ $tag->id }}" {{ request('type_tag') == $tag->id ? 'selected' : '' }}>
+                            {{ $tag->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- Strategy Tag Filter --}}
+            <div>
+                <label for="strategy_tag" class="block text-sm font-medium text-gray-700">Strategy Tag</label>
+                <select name="strategy_tag" id="strategy_tag" class="border rounded-lg px-3 py-2">
+                    <option value="">All</option>
+                    @foreach($strategyTags as $tag)
+                        <option value="{{ $tag->id }}" {{ request('strategy_tag') == $tag->id ? 'selected' : '' }}>
+                            {{ $tag->name }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
+            {{-- Active Filter --}}
+            <div>
+                <label for="active" class="block text-sm font-medium text-gray-700">Status</label>
+                <select name="active" id="active" class="border rounded-lg px-3 py-2">
+                    <option value="">All</option>
+                    <option value="1" {{ request('active') === '1' ? 'selected' : '' }}>Active</option>
+                    <option value="0" {{ request('active') === '0' ? 'selected' : '' }}>Inactive</option>
+                </select>
+            </div>
+
+            {{-- Submit Button --}}
+            <button type="submit"
+                    class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                Filter
+            </button>
+
+            {{-- Reset Button --}}
+            <a href="{{ route('posts.index') }}"
+               class="text-gray-600 underline ml-2 hover:text-gray-800">
+                Reset
+            </a>
+        </form>
 
         {{-- All Posts --}}
         <h1 class="text-3xl font-bold text-gray-900 mb-6">All Posts</h1>
