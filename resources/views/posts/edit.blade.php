@@ -6,21 +6,23 @@
         @method('PUT') {{-- Important: Use PUT or PATCH for updates --}}
 
         <div>
-            <label for="name">Name</label>
+            <label for="name" class="block font-semibold">Name</label>
             <input
                 type="text"
                 id="name"
                 name="name"
                 value="{{ old('name', $post->name) }}"
+                class="border rounded px-3 py-2 w-full"
                 required
             >
         </div>
 
         <div>
-            <label for="text">Text</label>
+            <label for="text" class="block font-semibold">Text</label>
             <textarea
                 id="text"
                 name="text"
+                class="border rounded px-3 py-2 w-full"
                 required
             >{{ old('text', $post->text) }}</textarea>
         </div>
@@ -32,6 +34,7 @@
                 id="type"
                 name="type"
                 value="{{ old('type', $post->type_tag_id) }}"
+                class="border rounded px-3 py-2 w-full"
                 required
             >
         </div>
@@ -43,6 +46,7 @@
                 id="strategy"
                 name="strategy"
                 value="{{ old('strategy', $post->strategy_tag_id) }}"
+                class="border rounded px-3 py-2 w-full"
                 required
             >
         </div>

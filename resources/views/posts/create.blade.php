@@ -37,7 +37,7 @@
         </div>
 
         <div>
-            <label for="image" class="block font-semibold">Image (optional)</label>
+            <label for="image" class="block font-semibold">Image</label>
             <input type="file" name="image" id="image" accept="image/*" class="border rounded px-3 py-2 w-full">
             @error('image')
             <p class="text-red-500 text-sm">{{ $message }}</p>
