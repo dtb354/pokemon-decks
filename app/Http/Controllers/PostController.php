@@ -14,7 +14,8 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
-        $query = Post::with(['user', 'strategyTag', 'typeTag']);
+        $query = Post::with(['user', 'strategyTag', 'typeTag'])
+            ->where('is_active', true);
 
         // Filters
         if ($request->filled('type_tag')) {

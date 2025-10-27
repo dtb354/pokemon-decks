@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ $title ?? config('app.name', 'Laravel') }}</title>
-
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased bg-gray-100">
@@ -27,7 +26,7 @@
             My Profile
         </x-nav-link>
 
-        {{-- ✅ Show admin links only if user is logged in AND is admin --}}
+        {{-- Show admin links only if user is logged in AND is admin --}}
         @auth
             @if(auth()->user()->is_admin)
                 <x-nav-link href="{{ route('admin.posts.index') }}" :active="request()->is('admin/posts')">
