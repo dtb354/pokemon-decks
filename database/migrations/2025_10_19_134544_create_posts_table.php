@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('strategy_tag_id');
             $table->foreign('strategy_tag_id')->references('id')->on('strategy_tags');
             $table->timestamp('created_at')->nullable()->useCurrent();
-            $table->timestamp('updated_at')->nullable()->default('DEFAULT NULL');
+            $table->timestamp('updated_at')->nullable();
         });
 
         Schema::enableForeignKeyConstraints();

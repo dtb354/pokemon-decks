@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('last_name', 100);
             $table->boolean('is_admin');
             $table->timestamp('created_at')->nullable()->useCurrent();
-            $table->timestamp('updated_at')->nullable()->default('DEFAULT NULL');
+            $table->timestamp('updated_at')->nullable();
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {
