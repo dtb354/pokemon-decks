@@ -46,8 +46,6 @@
                         @endif
                     </td>
                     <td class="border px-3 py-2 space-x-2">
-                        <a href="{{ route('admin.posts.edit', $post->id) }}" class="text-blue-600 hover:underline">Edit</a>
-
                         <form action="{{ route('admin.posts.toggle', $post->id) }}" method="POST" class="inline">
                             @csrf
                             @method('PATCH')
