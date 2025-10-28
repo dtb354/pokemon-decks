@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\StrategyTag;
+use App\Models\TypeTag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,8 +40,8 @@ class PostController extends Controller
 
 
         // Fetch all tags for filters
-        $typeTags = \App\Models\TypeTag::all();
-        $strategyTags = \App\Models\StrategyTag::all();
+        $typeTags = TypeTag::all();
+        $strategyTags = StrategyTag::all();
 
         return view('posts.index', compact('posts', 'firstPost', 'typeTags', 'strategyTags'));
     }

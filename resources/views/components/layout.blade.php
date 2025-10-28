@@ -18,13 +18,15 @@
             Posts
         </x-nav-link>
 
-        <x-nav-link href="{{ url('/posts/create') }}" :active="request()->is('posts/create')">
-            Create Post
-        </x-nav-link>
+        @auth
+            <x-nav-link href="{{ url('/posts/create') }}" :active="request()->is('posts/create')">
+                Create Post
+            </x-nav-link>
 
-        <x-nav-link href="{{ route('profile.show') }}" :active="request()->is('profile')">
-            My Profile
-        </x-nav-link>
+            <x-nav-link href="{{ route('profile.show') }}" :active="request()->is('profile')">
+                My Profile
+            </x-nav-link>
+        @endauth
 
         {{-- Show admin links only if user is logged in AND is admin --}}
         @auth
@@ -35,9 +37,17 @@
             @endif
         @endauth
 
-        <x-nav-link :href="route('logout')" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-            {{ __('Log Out') }}
-        </x-nav-link>
+
+        @if(auth()->user())
+            <x-nav-link :href="route('logout')" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                {{ __('Log Out') }}
+            </x-nav-link>
+        @else
+            <x-nav-link href="{{ url('/login') }}">
+                Login
+            </x-nav-link>
+        @endif
+
 
         <form method="POST" action="{{ route('logout') }}" id="logout-form" class="hidden">
             @csrf
