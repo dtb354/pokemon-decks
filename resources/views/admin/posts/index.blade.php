@@ -53,12 +53,6 @@
                                 {{ $post->is_active ? 'Deactivate' : 'Activate' }}
                             </button>
                         </form>
-
-                        <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST" class="inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Delete this post?')" class="text-red-600 hover:underline">Delete</button>
-                        </form>
                     </td>
                 </tr>
             @endforeach
