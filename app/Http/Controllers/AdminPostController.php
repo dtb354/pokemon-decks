@@ -37,49 +37,17 @@ class AdminPostController extends Controller
 
     public function edit($id)
     {
-        if (!Auth::check() || Auth::user()->is_admin != 1) {
-            abort(403, 'Unauthorized access.');
-        }
-
-        $post = Post::findOrFail($id);
-        return view('admin.posts.edit', compact('post'));
+        //
     }
 
     public function update(Request $request, $id)
     {
-        if (!Auth::check() || Auth::user()->is_admin != 1) {
-            abort(403, 'Unauthorized access.');
-        }
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'text' => 'required|string|max:255',
-        ]);
-
-        $post = Post::findOrFail($id);
-        $post->update([
-            'name' => $request->name,
-            'text' => $request->text,
-        ]);
-
-        return redirect()->route('admin.posts.index')->with('success', 'Post updated successfully.');
+        //
     }
 
     public function destroy($id)
     {
-        if (!Auth::check() || Auth::user()->is_admin != 1) {
-            abort(403, 'Unauthorized access.');
-        }
-
-        $post = Post::findOrFail($id);
-
-        if ($post->image) {
-            Storage::delete('public/' . $post->image);
-        }
-
-        $post->delete();
-
-        return redirect()->route('admin.posts.index')->with('success', 'Post deleted successfully.');
+        //
     }
 
     public function toggleActive($id)
