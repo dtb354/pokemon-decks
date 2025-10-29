@@ -22,7 +22,14 @@
 
         <div>
             <label for="type" class="block font-semibold">Type Tag</label>
-            <input type="number" id="type" name="type" value="{{ old('type') }}" class="border rounded px-3 py-2 w-full">
+            <select name="type" id="type_tag" class="border rounded-lg px-3 py-2">
+                <option value="">All</option>
+                @foreach($typeTags as $tag)
+                    <option value="{{ $tag->id }}" {{ request('type_tag') == $tag->id ? 'selected' : '' }}>
+                        {{ $tag->name }}
+                    </option>
+                @endforeach
+            </select>
             @error('type')
             <p class="text-red-500 text-sm">{{ $message }}</p>
             @enderror
@@ -30,7 +37,14 @@
 
         <div>
             <label for="strategy" class="block font-semibold">Strategy Tag</label>
-            <input type="number" id="strategy" name="strategy" value="{{ old('strategy') }}" class="border rounded px-3 py-2 w-full">
+            <select name="strategy" id="strategy" class="border rounded-lg px-3 py-2">
+                <option value="">All</option>
+                @foreach($strategyTags as $tag)
+                    <option value="{{ $tag->id }}" {{ request('strategy_tag') == $tag->id ? 'selected' : '' }}>
+                        {{ $tag->name }}
+                    </option>
+                @endforeach
+            </select>
             @error('strategy')
             <p class="text-red-500 text-sm">{{ $message }}</p>
             @enderror

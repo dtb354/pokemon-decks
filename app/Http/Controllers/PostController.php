@@ -53,7 +53,11 @@ class PostController extends Controller
     public function create()
     {
         //
-        return view('posts.create');
+        // Fetch tags used by the create form and pass them to the view
+        $typeTags = TypeTag::all();
+        $strategyTags = StrategyTag::all();
+
+        return view('posts.create', compact('typeTags', 'strategyTags'));
     }
 
     /**
@@ -115,7 +119,10 @@ class PostController extends Controller
             abort(403, 'Unauthorized action.');
         }
 
-        return view('posts.edit', compact('post'));
+        $typeTags = TypeTag::all();
+        $strategyTags = StrategyTag::all();
+
+        return view('posts.edit', compact('post', 'typeTags', 'strategyTags'));
     }
 
     /**
