@@ -54,4 +54,35 @@
             @endif
         </div>
     </div>
+
+    {{-- Comment Section --}}
+    <div class="mt-8">
+        <h3 class="text-xl font-semibold mb-4">Comments</h3>
+
+        {{-- Add new comment --}}
+        @auth
+            <form action="{{ route('comments.store') }}" method="POST" class="mt-4">
+                @csrf
+                <input type="hidden" name="post_id" value="{{ $post->id }}">
+                <textarea name="text" rows="3" class="w-full border rounded-lg p-2" placeholder="Write your comment..."></textarea>
+                @error('text')
+                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
+                <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-2 hover:bg-blue-700">
+                    Post Comment
+                </button>
+            </form>
+        @else
+            <p class="text-gray-600 mt-4">Please <a href="{{ route('login') }}" class="text-blue-600 underline">log in</a> to comment.</p>
+        @endauth
+
+        {{-- Existing comments --}}
+        @foreach($post->comments as $comment)
+            <div class="border-b border-gray-200 py-2">
+                <p class="text-gray-700"><strong>{{ $comment->user->first_name }}</strong> <strong>{{ $comment->user->last_name }}</strong> said:</p>
+                <p class="text-gray-800">{{ $comment->text }}</p>
+                <p class="text-sm text-gray-500">{{ $comment->created_at->diffForHumans() }}</p>
+            </div>
+        @endforeach
+    </div>
 </x-layout>

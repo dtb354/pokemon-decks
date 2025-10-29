@@ -66,5 +66,10 @@ Route::delete('/admin/posts/{id}', [AdminPostController::class, 'destroy'])->nam
 Route::patch('/admin/posts/{id}/toggle', [AdminPostController::class, 'toggleActive'])->name('admin.posts.toggle');
 
 
+Route::post('/comments', [App\Http\Controllers\CommentController::class, 'store'])
+    ->middleware('auth')
+    ->name('comments.store');
+
+
 
 require __DIR__.'/auth.php';

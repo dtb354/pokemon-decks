@@ -101,7 +101,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
 
-
+        $post = Post::with(['user', 'comments.user'])->findOrFail($id);
 
         //
         return view('posts.show', compact('post'));
