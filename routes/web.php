@@ -32,6 +32,10 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
+Route::get('/admin', function(){
+    return view('admin.index');
+});
+
 Route::get('products/{name}', function(string $name) {
     // code
     $product = $name;

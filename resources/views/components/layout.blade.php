@@ -31,7 +31,7 @@
         {{-- Show admin links only if user is logged in AND is admin --}}
         @auth
             @if(auth()->user()->is_admin)
-                <x-nav-link href="{{ route('admin.posts.index') }}" :active="request()->is('admin/posts')">
+                <x-nav-link href="{{ url('/admin') }}">
                     Admin Dashboard
                 </x-nav-link>
             @endif
@@ -45,6 +45,10 @@
         @else
             <x-nav-link href="{{ url('/login') }}">
                 Login
+            </x-nav-link>
+
+            <x-nav-link href="{{ url('/register') }}">
+                Register
             </x-nav-link>
         @endif
 
