@@ -2,8 +2,9 @@
 
 use App\Http\Controllers\AdminPostController;
 use App\Http\Controllers\PostController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StrategyTagController;
+use App\Http\Controllers\TypeTagController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -36,28 +37,9 @@ Route::get('/admin', function(){
     return view('admin.index');
 });
 
-Route::get('products/{name}', function(string $name) {
-    // code
-    $product = $name;
-    return view('products', [
-        'product' => $product
-    ]);
-});
-
 Route::get ('/test/id', function (int $id) {
     return view('test', compact('id'));
 });
-
-Route::get('/user/profile', function () {
-    // ...
-})->name('profile');
-
-Route::get('/products/details/{id?}', function ($id) {
-    return "Product details voor product met ID: " . $id;
-})->name('product.details');
-//Named Routing
-
-Route::resource('products', ProductController::class);
 
 Route::resource('posts', PostController::class);
 
@@ -74,6 +56,21 @@ Route::post('/comments', [App\Http\Controllers\CommentController::class, 'store'
     ->middleware('auth')
     ->name('comments.store');
 
+//Route::middleware(['auth', 'is_admin'])->prefix('admin')->group(function () {
+//    Route::resource('type-tags', TypeTagController::class);
+//    Route::resource('strategy-tags', StrategyTagController::class);
+//});
 
+Route::prefix('admin')->group(function () {
+    Route::get('/type-tags', [TypeTagController::class, 'index'])->name('admin.type-tags.index');
+    Route::get('/type-tags/create', [TypeTagController::class, 'create'])->name('admin.type-tags.create');
+    Route::post('/type-tags', [TypeTagController::class, 'store'])->name('admin.type-tags.store');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/strategy-tags', [StrategyTagController::class, 'index'])->name('admin.strategy-tags.index');
+    Route::get('/strategy-tags/create', [StrategyTagController::class, 'create'])->name('admin.strategy-tags.create');
+    Route::post('/strategy-tags', [StrategyTagController::class, 'store'])->name('admin.strategy-tags.store');
+});
 
 require __DIR__.'/auth.php';
