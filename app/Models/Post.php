@@ -35,9 +35,4 @@ class Post extends Model
         return $this->belongsTo(TypeTag::class, 'type_tag_id');
     }
 
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
 }

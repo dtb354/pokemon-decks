@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Models\StrategyTag;
 use App\Models\TypeTag;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -66,6 +67,12 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //dd($request);
+        $user = auth()->user();
+
+        if ($user->comments()->count() < 3) {
+            return redirect()->back()
+                ->withErrors(['You need to post at least 3 comments before creating a post.']);
+        }
 
         $request->validate([
             'name' => ['required', 'string', 'max:255'],

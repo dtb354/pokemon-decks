@@ -2,6 +2,14 @@
     @auth
         <h1 class="text-2xl font-bold mb-4">Create Post</h1>
 
+        @if($errors->any())
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+                @foreach ($errors->all() as $error)
+                    <p>{{ $error }}</p>
+                @endforeach
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data" class="space-y-4">
             @csrf
 
