@@ -1,61 +1,65 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+08 - 10 - 2025
+Started the pokemon-decks project and made an about us page
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+14 - 10 - 2025 
+Built my first model & controller to experiment with my database
 
-## About Laravel
+15 - 10 - 2025
+Made create and edit functionality for posts
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+19 - 10 - 2025
+Updated database schema to fit more use cases 
+Post to Strategy tags relation
+Post to Type tags relation
+User and Post to like relation
+User and Post to comment relation
+User and Post to favorite relation
+User to post relation
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+20 - 10 - 2025
+Edit functionality bug fix: edit form would get an error on submission
+Login controller & model updated to fit the new database schema
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+21 - 10 - 2025
+Made a layout for nav using the laravel template method
 
-## Learning Laravel
+22 - 10 - 2025
+Profile display page made
+Made changes to the home page to show different content for a logged out user or logged in user
+Posts are now linked to logged in user_id rather than hardcoded value in controller
+Image upload functionality has been added
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+23 - 10 - 2025
+Styling changes for my create form
+Styling added to posts index page
+Added delete functionality and delete button added
+Edit functionality changed to support image changes
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+25 - 10 - 2025
+Filter function added for posts index page
+Create and Edit page UI changes
+Admin post management feature added: You can activate and deactivate posts
+Active and Inactive posts filter added for admin views
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+27 - 10 - 2025
+PostController edited to show only active posts on index posts page
 
-## Laravel Sponsors
+28 - 10 - 2025
+Removed the edit button for admin views: admins are not allowed to edit posts of other users
+Changed redirect after login
+Changed migrations to fit hosting database:
+create_likes
+create_ users
+create_posts
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+29 - 10 - 2025
+Nav layout is changed when user is logged out
+Changed the create posts page to only allow logged in users
+Updated the comments table to delete on cascade
+Added comments functionality on posts
+Gave styling to individual post view
+Create and edit form UI changes: tags now get a dropdown form
+Removed edit and delete code for admins: admins should not be allowed to edit and delete posts
 
-### Premium Partners
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
