@@ -102,7 +102,7 @@
                     </div>
 
                     {{-- Tags --}}
-                    <div class="mt-2 text-sm text-gray-500">
+                    <div class="mt-2 text-sm text-gray-500 pl-4">
                         <span class="inline-block bg-blue-100 text-blue-800 px-2 py-1 rounded-full">
                             {{ $post->typeTag ? $post->typeTag->name : 'No Type Tag' }}
                         </span>
@@ -112,7 +112,7 @@
                     </div>
 
                     {{-- Author --}}
-                    <p class="mt-2 text-xs text-gray-500">By {{ $post->user ? $post->user->first_name . ' ' . $post->user->last_name : 'Unknown' }}</p>
+                    <p class="mt-2 text-xs text-gray-500 pl-4">By {{ $post->user ? $post->user->first_name . ' ' . $post->user->last_name : 'Unknown' }}</p>
                     </div>
             @endforeach
         </div>
