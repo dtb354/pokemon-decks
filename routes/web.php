@@ -43,6 +43,8 @@ Route::get ('/test/id', function (int $id) {
 
 Route::resource('posts', PostController::class);
 
+Route::resource('profile', ProfileController::class);
+
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
 
 Route::get('/admin/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');

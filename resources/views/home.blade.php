@@ -6,7 +6,7 @@
     @endauth
 
     @guest
-        <p>You are not logged in. <a href="{{ route('login') }}">Login here</a>.</p>
+        <p>You are not logged in. <a href="{{ route('login') }}" class="text-blue-600" >Login here</a>.</p>
     @endguest
 
 </x-layout>
