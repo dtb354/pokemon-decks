@@ -69,7 +69,7 @@ class PostController extends Controller
         //dd($request);
         $user = auth()->user();
 
-        if ($user->comments()->count() < 3) {
+        if (!$user->is_admin &&$user->comments()->count() < 3) {
             return redirect()->back()
                 ->withErrors(['You need to post at least 3 comments before creating a post.']);
         }
