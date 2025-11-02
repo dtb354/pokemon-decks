@@ -74,7 +74,7 @@
     @endauth
 
     @guest
-            <p>You are not logged in. You need to be logged in to create a post <a href="{{ route('login') }}">Login here</a>.</p>
+            <p>You are not logged in. You need to be logged in to create a post. <a href="{{ route('login') }}" class="text-blue-600">Login here</a>.</p>
     @endguest
 
 </x-layout>
