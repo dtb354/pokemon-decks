@@ -100,6 +100,15 @@
 
 ---
 
+### **01 - 11 - 2025**
+
+* Changed styling on post cards on index
+* Admin dashboard was made for easier navigation
+* Admins can now add new tags from dashboard
+
+
+
+
 
 
 
