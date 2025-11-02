@@ -30,18 +30,17 @@ Route::get('/contact', function () {
     return view('contact');
 });
 
-Route::get('/admin', function(){
-    return view('admin.index');
-});
+
 
 Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show')->middleware('auth');
 
-Route::middleware(['auth', 'is_admin']) ->prefix('admin')->group(function (){
-    Route::get('/admin/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
-    Route::get('/admin/posts/{id}/edit', [AdminPostController::class, 'edit'])->name('admin.posts.edit');
-    Route::put('/admin/posts/{id}', [AdminPostController::class, 'update'])->name('admin.posts.update');
-    Route::delete('/admin/posts/{id}', [AdminPostController::class, 'destroy'])->name('admin.posts.destroy');
-    Route::patch('/admin/posts/{id}/toggle', [AdminPostController::class, 'toggleActive'])->name('admin.posts.toggle');
+Route::prefix('admin')->group(function(){
+    Route::get('/', function(){return view('admin.index');});
+    Route::get('/posts', [AdminPostController::class, 'index'])->name('admin.posts.index');
+    Route::get('/posts/{id}/edit', [AdminPostController::class, 'edit'])->name('admin.posts.edit');
+    Route::put('/posts/{id}', [AdminPostController::class, 'update'])->name('admin.posts.update');
+    Route::delete('/posts/{id}', [AdminPostController::class, 'destroy'])->name('admin.posts.destroy');
+    Route::patch('/posts/{id}/toggle', [AdminPostController::class, 'toggleActive'])->name('admin.posts.toggle');
 });
 
 Route::post('/comments', [App\Http\Controllers\CommentController::class, 'store'])
@@ -49,6 +48,7 @@ Route::post('/comments', [App\Http\Controllers\CommentController::class, 'store'
     ->name('comments.store');
 
 Route::prefix('admin')->group(function () {
+
     Route::get('/type-tags', [TypeTagController::class, 'index'])->name('admin.type-tags.index');
     Route::get('/type-tags/create', [TypeTagController::class, 'create'])->name('admin.type-tags.create');
     Route::post('/type-tags', [TypeTagController::class, 'store'])->name('admin.type-tags.store');
