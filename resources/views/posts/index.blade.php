@@ -51,6 +51,16 @@
                 </select>
             </div>
 
+            {{-- Search Bar --}}
+            <div class="flex-1">
+                <label for="search" class="block text-sm font-medium text-gray-700">Search</label>
+                <input type="text" name="search" id="search"
+                       value="{{ request('search') }}"
+                       placeholder="Search posts..."
+                       class="border rounded-lg px-3 py-2 w-full"
+                >
+            </div>
+
             {{-- Submit Button --}}
             <button type="submit"
                     class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">

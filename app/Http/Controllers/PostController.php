@@ -20,6 +20,15 @@ class PostController extends Controller
         $query = Post::with(['user', 'strategyTag', 'typeTag'])
             ->where('is_active', true);
 
+        // Search filter
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('text', 'like', "%{$search}%");
+            });
+        }
+
         // Filters
         if ($request->filled('type_tag')) {
             $query->where('type_tag_id', $request->type_tag);
