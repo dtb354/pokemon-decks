@@ -106,6 +106,19 @@
 * Admin dashboard was made for easier navigation
 * Admins can now add new tags from dashboard
 
+---
+
+### **02 - 11 - 2025**
+
+* Removed active/inactive filter from posts index
+* Admins having access to deeper validation without commenting 3 times
+* Searching by text added to index for posts
+* Cleaned/reorganised up web.php routing
+* UI changed for create.blade.php
+* bug fix for posts index
+* bug fix for Comments on Post Model
+* Added compatibility for s3-object storage for live hosting (code still needs to be changed to store files in storage rather than local development folder)
+
 
 
 
